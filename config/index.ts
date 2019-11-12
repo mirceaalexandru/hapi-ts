@@ -27,6 +27,6 @@ export async function get (): Promise<ConfigInterface> {
   const result: ValidationResult = await schema.validate(environment());
   internals.config = <ConfigInterface><unknown>result;
   // tslint:disable-next-line
-  console.log(internals.config, 'Load using configuration'); // eslint-disable-line
+  console.log(internals.config, 'Load using configuration');
   return internals.config;
 }

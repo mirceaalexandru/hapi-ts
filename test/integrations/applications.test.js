@@ -9,7 +9,10 @@ describe('Applications can be added and retrieved', () => {
   let server;
 
   beforeEach(async () => {
-    server = await register({service: {}});
+    server = await register({
+      service: {},
+      applicationTTL: 30 * 1000
+    });
   });
 
   afterEach(async () => {
@@ -106,7 +109,10 @@ describe('Applications can be removed', () => {
   let server;
 
   beforeEach(async () => {
-    server = await register({service: {}});
+    server = await register({
+      service: {},
+      applicationTTL: 30 * 1000
+    });
   });
 
   afterEach(async () => {
@@ -168,7 +174,8 @@ describe('Groups are created and can be retrieved', () => {
 
   beforeEach(async () => {
     server = await register({
-      service: {}
+      service: {},
+      applicationTTL: 30 * 1000
     });
   });
 

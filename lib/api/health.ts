@@ -14,14 +14,7 @@ exports.plugin = {
           'hapi-swagger': {
             responses: {
               200: {
-                description: 'Service is working properly',
-                schema: Joi.object({
-                  name: Joi.string(),
-                  version: Joi.string()
-                }).label('Result')
-              },
-              400: {
-                description: 'Something wrong happened'
+                description: 'Service is working properly'
               }
             }
           }

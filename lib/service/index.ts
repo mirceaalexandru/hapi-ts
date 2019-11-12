@@ -1,4 +1,4 @@
-import * as boom from '@hapi/boom';
+import boom from '@hapi/boom';
 import { Server } from '@hapi/hapi';
 import { configure as getPlugins } from './plugins';
 import { endpoints as api } from "../api";
