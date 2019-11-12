@@ -6,6 +6,10 @@ Table of Contents
 =================
 
    * [Simple HapiJs project](#simple-hapijs-project)
+   * [Table of Contents](#table-of-contents)
+   * [Starting the project](#starting-the-project)
+      * [Clone project](#clone-project)
+      * [Starting](#starting)
    * [Features](#features)
    * [Implementation details](#implementation-details)
       * [Configuration](#configuration)
@@ -14,6 +18,19 @@ Table of Contents
       * [Endpoint validation](#endpoint-validation)
       * [Logging](#logging)
    * [Testing](#testing)
+   
+# Starting the project
+
+## Clone project
+
+``git clone git@github.com:mirceaalexandru/hapi-ts.git``
+
+## Starting
+
+ * Run `npm i`
+ * Copy `env_sample` to `.env`
+ * Run `npm run start`
+ * Check documentation at http://localhost:3000/documentation
 
 # Features
 
