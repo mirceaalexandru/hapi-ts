@@ -1,6 +1,6 @@
 # Simple HapiJs project
 
-https://travis-ci.org/mirceaalexandru/hapi-ts.svg?branch=master
+![Build Status](https://travis-ci.org/mirceaalexandru/hapi-ts.svg?branch=master)
 
 Table of Contents
 =================
