@@ -1,5 +1,20 @@
 # Simple HapiJs project
 
+https://travis-ci.org/mirceaalexandru/hapi-ts.svg?branch=master
+
+Table of Contents
+=================
+
+   * [Simple HapiJs project](#simple-hapijs-project)
+   * [Features](#features)
+   * [Implementation details](#implementation-details)
+      * [Configuration](#configuration)
+         * [Environment variables](#environment-variables)
+      * [Swagger documentation](#swagger-documentation)
+      * [Endpoint validation](#endpoint-validation)
+      * [Logging](#logging)
+   * [Testing](#testing)
+
 # Features
 
 A RESTful in-memory discovery service.
