@@ -18,7 +18,7 @@ export function configure(config: ConfigInterface): any[] {
         }
       }
     }
-  ]
+  ];
 
   if (config.env === 'development') {
     // Swagger documentation is available only in development environment.
@@ -29,8 +29,7 @@ export function configure(config: ConfigInterface): any[] {
         plugin: HapiSwagger,
         options: {
           info: {
-            title: `Challenge Service API Documentation`,
-            version: config.version,
+            title: `Challenge Service API Documentation`
           },
           grouping: 'tags'
         }

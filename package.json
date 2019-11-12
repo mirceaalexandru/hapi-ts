@@ -8,8 +8,7 @@
     "test:unit": "ts-node test/unit/*.test.js",
     "test:integrations": "ts-node test/integrations/*.test.js",
     "dev": "nodemon --exec ts-node ./index.ts",
-    "serve": "npm run build:ts && node ./dist/index.js",
-    "build:ts": "tsc",
+    "start": "'ts-node' index.ts",
     "lint": "tslint --project ."
   },
   "author": "Mircea Alexandru <mircea.alexandru@gmail.com> (http://www.alexandrumircea.ro/)",
@@ -17,7 +16,7 @@
     "node": ">=10.17.0"
   },
   "dependencies": {
-    "@hapi/boom": "^8.0.1",
+    "@hapi/boom": "^7.4.11",
     "@hapi/hapi": "^18.4.0",
     "@hapi/inert": "^5.2.2",
     "@hapi/joi": "^15.1.1",

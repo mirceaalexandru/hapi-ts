@@ -1,7 +1,6 @@
 import {ApplicationInterface} from "./ApplicationInterface";
 
 export interface GroupInterface {
-    group: string,
     instances: ApplicationInterface[],
     createdAt: Date,
     updatedAt: Date

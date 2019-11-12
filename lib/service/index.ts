@@ -9,12 +9,12 @@ export async function start (config: ConfigInterface) {
   const server = await register (config);
   await server.start();
 
-  server.logger().info(`Server ${config.projectName}@${config.version} running at: ${server.info.uri}`);
+  server.logger().info(`Server running at: ${server.info.uri}`);
   return server;
 }
 
 export async function register (config: ConfigInterface) {
-  const { service: {host, port} } = config
+  const { service: {host, port} } = config;
 
   const server: Server = new Server({
     port,
@@ -32,14 +32,14 @@ export async function register (config: ConfigInterface) {
 
   server.app = {
     config: config
-  }
+  };
 
   await server.register([
     ...getPlugins(config),
     ...api
-  ])
+  ]);
 
-  const storage = <any>(new Storage(server.logger(), 10000));
+  const storage = <any>(new Storage(server.logger(), config.applicationTTL));
   server.decorate('server', 'storage', storage);
 
   server.events.on('stop', () => {
