@@ -1,6 +1,6 @@
 {
   "name": "challenge",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A challenge service implemented with HapiJS",
   "main": "index.js",
   "scripts": {

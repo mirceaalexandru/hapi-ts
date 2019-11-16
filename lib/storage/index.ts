@@ -52,6 +52,8 @@ export default class Storage {
       this.groups[group].instances.push(app);
     }
 
+    // update updatedAt for group
+    this.groups[group].updatedAt = new Date();
     return {
       id: app.id,
       group: app.group,
@@ -102,6 +104,9 @@ export default class Storage {
         .filter((inst: ApplicationInterface) => {
           if (inst.id === id) {
             clearTimeout(inst.timeout);
+
+            // update updatedAt for group
+            this.groups[group].updatedAt = new Date();
             return false;
           }
           return true;

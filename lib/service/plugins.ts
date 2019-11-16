@@ -29,7 +29,8 @@ export function configure(config: ConfigInterface): any[] {
         plugin: HapiSwagger,
         options: {
           info: {
-            title: `Challenge Service API Documentation`
+            title: `Challenge Service API Documentation`,
+            version: '1.0.0'
           },
           grouping: 'tags'
         }

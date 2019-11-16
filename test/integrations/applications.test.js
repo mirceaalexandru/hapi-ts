@@ -290,7 +290,81 @@ describe('Groups are created and can be retrieved', () => {
     expect(resRetrieveGroup.result[0].createdAt).to.be.date();
     expect(resRetrieveGroup.result[0].updatedAt).to.be.date();
 
+    // updatedAt was changed
     expect(res.result.updatedAt).to.not.be.equal(resRetrieveGroup.result[0].updatedAt);
+    // createdAt is the same
+    expect(res.result.createdAt).to.be.equal(resRetrieveGroup.result[0].createdAt);
+  });
+
+  it('when adding application second time it will update updatedAt for group', async () => {
+    const group = 'group';
+    const app = 'app';
+    const res = await server.inject({
+      method: 'post',
+      url: `/${group}/${app}`,
+      payload: {}
+    });
+
+    expect(res.statusCode).to.equal(200);
+    expect(res.result.id).to.equal(app);
+    expect(res.result.group).to.equal(group);
+    expect(res.result.createdAt).to.be.date();
+    expect(res.result.updatedAt).to.be.date();
+    expect(res.result.meta).to.be.undefined();
+
+
+    // can retrieve groups information
+    const resRetrieveGroup = await server.inject({
+      method: 'get',
+      url: `/${group}`
+    });
+
+    expect(resRetrieveGroup.statusCode).to.equal(200);
+    expect(resRetrieveGroup.result).to.be.array();
+    expect(resRetrieveGroup.result).to.have.length(1);
+    expect(resRetrieveGroup.result[0].id).to.equal(app);
+    expect(resRetrieveGroup.result[0].group).to.equal(group);
+    expect(resRetrieveGroup.result[0].createdAt).to.be.date();
+    expect(resRetrieveGroup.result[0].updatedAt).to.be.date();
+
+    // add it second time
+    const res2 = await server.inject({
+      method: 'post',
+      url: `/${group}/${app}`,
+      payload: {
+        meta: {
+          something: 'else'
+        }
+      }
+    });
+
+    expect(res2.statusCode).to.equal(200);
+    expect(res2.result.id).to.equal(app);
+    expect(res2.result.group).to.equal(group);
+    expect(res2.result.createdAt).to.be.date();
+    expect(res2.result.updatedAt).to.be.date();
+    expect(res2.result.meta).to.be.equal({
+      something: 'else'
+    });
+
+    // can retrieve groups information
+    const resRetrieveGroup2 = await server.inject({
+      method: 'get',
+      url: `/${group}`
+    });
+
+    expect(resRetrieveGroup2.statusCode).to.equal(200);
+    expect(resRetrieveGroup2.result).to.be.array();
+    expect(resRetrieveGroup2.result).to.have.length(1);
+    expect(resRetrieveGroup2.result[0].id).to.equal(app);
+    expect(resRetrieveGroup2.result[0].group).to.equal(group);
+    expect(resRetrieveGroup2.result[0].createdAt).to.be.date();
+    expect(resRetrieveGroup2.result[0].updatedAt).to.be.date();
+
+    // updatedAt for group was changed
+    expect(resRetrieveGroup.result[0].updatedAt).to.not.be.equal(resRetrieveGroup2.result[0].updatedAt);
+    // createdAt for group is the same
+    expect(resRetrieveGroup.result[0].createdAt).to.be.equal(resRetrieveGroup2.result[0].createdAt);
   });
 
   it('can add application and then retrieve group information', async () => {

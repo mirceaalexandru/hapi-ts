@@ -98,7 +98,7 @@ describe('Storage', () => {
     expect(resRetrieve2).to.have.length(0);
   });
 
-  it('application information is deleted after timeout', async () => {
+  it('application information is deleted after timeout and empty group is not returned.', async () => {
     const group = 'group1';
     const app = 'app1';
 
@@ -119,6 +119,56 @@ describe('Storage', () => {
         expect(resRetrieve).to.have.length(0);
         resolve()
       }, 1100);
+    })
+  });
+
+  it('application information is deleted after timeout and updateAt property for group is updated.', () => {
+    const group = 'group';
+    const app = 'app';
+    const app2 = 'app2';
+
+    const res = storage.add({ group, id: app });
+    expect(res.id).to.equal(app);
+    expect(res.group).to.equal(group);
+    expect(res.createdAt).to.be.date();
+    expect(res.updatedAt).to.be.date();
+
+    const resRetrieve = storage.getGroups();
+    expect(resRetrieve).to.be.array();
+    expect(resRetrieve).to.have.length(1);
+
+    return new Promise(function(resolve) {
+      let secondAppUpdatedAt;
+      // check after first app was removed
+      setTimeout(function() {
+        const resRetrieve = storage.getGroups();
+        expect(resRetrieve).to.be.array();
+        expect(resRetrieve).to.have.length(1);
+
+        // test that updatedAt for group was changed when application was automatically deleted
+        expect(resRetrieve[0].updatedAt).to.not.be.equal(secondAppUpdatedAt);
+
+        return resolve();
+      }, 1100);
+
+      // add second app to make sure group information can be retrieved
+      setTimeout(function() {
+        const resAdd = storage.add({ group, id: app2 });
+
+        expect(resAdd.id).to.equal(app2);
+        expect(resAdd.group).to.equal(group);
+        expect(resAdd.createdAt).to.be.date();
+        expect(resAdd.updatedAt).to.be.date();
+
+        const resRetrieve = storage.getGroups();
+        expect(resRetrieve).to.be.array();
+        expect(resRetrieve).to.have.length(1);
+        expect(resRetrieve[0].instances).to.be.equal(2);
+
+        expect(resRetrieve[0].updatedAt).to.not.be.equal(res.updatedAt);
+
+        secondAppUpdatedAt = resRetrieve[0].updatedAt;
+      }, 500);
     })
   });
 });
